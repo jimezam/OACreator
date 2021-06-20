@@ -5,7 +5,6 @@ from os.path import join
 from src.oa.io.FileData import FileData
 from src.oa.io.MarkdownFileData import MarkdownFileData
 from src.oa.io.DirectoryData import DirectoryData
-import src.oa.io.writer.oa_writer as writer
 from src.oa.converters.ConverterMarkdown2HTML import ConverterMarkdown2HTML
 
 logger = logging.getLogger('root')
@@ -20,12 +19,12 @@ def process(entries, outputPath):
             else:
                 logger.warning(f"Not source file [{entry.getFullPath()}] will be ignored.")
 
-            if(not html):
-                logger.warning(f"Source file [{entry.getFullPath()}] has no contents, will be ignored.")
-            else:
-                name = entry.getProperty('name') if entry.hasProperty('name') else path.splitext(entry.getNameWithoutIndexOrdered())[0]
+            # if(not html):
+            #     logger.warning(f"Source file [{entry.getFullPath()}] has no contents, will be ignored.")
+            # else:
+            #     name = entry.getProperty('name') if entry.hasProperty('name') else path.splitext(entry.getNameWithoutIndexOrdered())[0]
                 
-                writer.write(entry.path, outputPath, name, html)
+            #     writer.write(entry.path, outputPath, name, html)
 
         if(isinstance(entry, DirectoryData)):
             # TODO
