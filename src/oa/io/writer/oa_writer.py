@@ -3,3 +3,5 @@ def write(inputPath, outputPath, name, contents):
     print(outputPath)
     print(name)
     print(contents)
+    
+    # TODO
