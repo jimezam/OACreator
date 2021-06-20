@@ -1,5 +1,6 @@
 from os.path import join
 import sys
+import os
 import logging
 
 logger = logging.getLogger('root')
@@ -10,7 +11,8 @@ class EntryData:
         self.path = path
         self.name = name
         self.properties = {
-            "weight": sys.maxsize
+            "weight": sys.maxsize,
+            "name": os.path.splitext(self.name)[0]
         }
 
     def __str__(self):

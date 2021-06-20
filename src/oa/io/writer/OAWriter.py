@@ -8,8 +8,9 @@ class OAWriter:
     def __init__(self, inputPath, outputPath):
         self.inputPath = inputPath
         self.outputPath = outputPath
-        
-    def write(self, entry, content):
+    
+    @staticmethod
+    def createEntryPath(outputPath, entry):
         # Split the entry's full path
         sourcePath = os.path.normpath(entry.getFullPath()).split(os.sep)
         
@@ -23,19 +24,24 @@ class OAWriter:
         filenameNoExtension = os.path.splitext(filename)[0]
         
         # Get the output's full path
-        path = self.outputPath
+        path = outputPath
         
         if(sourcePath[1:-1]):
             path = os.path.join(path, reduce(os.path.join, sourcePath[1:-1]))
+            
+        filePath = os.path.join(path, filenameNoExtension+".html")
+        
+        return path, filePath
+        
+    def write(self, entry, content):
+        # Get the entry output's path and filepath
+        path, filePath = OAWriter.createEntryPath(self.outputPath, entry)
         
         # Create the output's directory structure for the entry
         if not os.path.exists(path):
             os.makedirs(path)
             
-        path = os.path.join(path, filenameNoExtension+".html")
-            
-        # Write the entry contents
-            
-        file = open(path, 'w')
+        # Write the entry contents            
+        file = open(filePath, 'w')
         file.write(content)
         file.close()

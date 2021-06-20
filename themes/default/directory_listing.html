@@ -1,0 +1,10 @@
+<ul>
+    {{# elements }}
+    <li>
+        <a href="{{ url }}" title="{{ hint }}">{{ name }}</a>
+    </li>
+    {{/ elements }}
+    {{^ elements }}
+    <li>¡Ninguno!</li>
+    {{/ elements }}
+</ul>

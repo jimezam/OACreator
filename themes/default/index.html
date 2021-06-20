@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <!-- Header   -->
-      <div class="row">
+      <div class="row mb-2">
         <div class="col-sm-12">
           <div class="card">
             <div class="card-body">
@@ -28,19 +28,30 @@
           <div class="card h-100">
             <div class="card-body">
               <h4 class="card-title">Contenidos</h4>              
-              <p class="card-text">Index</p>
+              <div class="card-text">
+                {{# items }}
+                  <p style="margin-bottom: 5px">
+                    <a href="{{ url }}" title="{{ hint }}">{{ name }} {{ type }}</a>
+                  </p>
+                {{/ items }}
+                {{^ items }}
+                  ¡Ninguno!
+                {{/ items }}
+              </div>
             </div>
           </div>
         </div>
 
         <div class="col-sm-7">
-          <div class="card">
+          <div class="card mb-2">
             <div class="card-body">
-              Breadcrumb
+              {{# breadcrumbs }}
+              > <a href="{{ url }}" title="{{ hint }}">{{ name }}</a>
+              {{/ breadcrumbs }}
             </div>
           </div>
 
-          Contents
+          {{{ content }}}
         </div>
 
         <div class="col-sm-2">
@@ -53,7 +64,7 @@
       </div>
 
       <!-- Footer -->
-      <div class="row">
+      <div class="row mt-2">
         <div class="col-sm-12">
           <div class="card">
             <div class="card-body">

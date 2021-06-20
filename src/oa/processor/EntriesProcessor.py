@@ -18,7 +18,7 @@ class EntriesProcessor:
             if(isinstance(entry, FileData)):
                 if(isinstance(entry, MarkdownFileData)):      # markdown
                     try:
-                        self.processMarkdownFile(entry)                    
+                        self.processMarkdownFileData(entry)                    
                     except Exception as e:
                         logger.warning(f"Source file [{entry.getFullPath()}] {e}, will be ignored.")    
                         entries.remove(entry)                        
@@ -28,7 +28,8 @@ class EntriesProcessor:
             if(isinstance(entry, DirectoryData)):
                 self.process(entry.getEntries())
     
-    def processMarkdownFile(self, entry):
+    # TODO: mover todo markdown a MarkdownFileData?
+    def processMarkdownFileData(self, entry):
         # Read front matter / Read contents
         entry.loadContents()
 
