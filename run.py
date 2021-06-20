@@ -27,7 +27,7 @@ def main():
 
     # Get the entries available
     
-    entryList = reader.list(inputPath, recursive=True, sort=True)
+    entryList = reader.list(inputPath, recursive=True)
 
     # reader.printList(entryList)
     

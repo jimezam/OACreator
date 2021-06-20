@@ -5,7 +5,7 @@ from os.path import isfile, join
 from src.oa.io.FileData import FileData
 from src.oa.io.DirectoryData import DirectoryData
 
-def list(path, recursive=True, sort=True):
+def list(path, recursive=True):
     elements = []
 
     for entry in listdir(path):
@@ -21,18 +21,12 @@ def list(path, recursive=True, sort=True):
             read = DirectoryData(path, entry)
 
             if(recursive):
-                entries = list(read.getFullPath(), recursive, sort)
-                
-                if(sort):
-                    entries.sort()
-                
+                entries = list(read.getFullPath(), recursive)
+                                
                 read.setEntries(entries)
                 
         elements.append(read)
         
-    if(sort):
-        elements.sort()
-
     return elements
 
 def printList(entries):
