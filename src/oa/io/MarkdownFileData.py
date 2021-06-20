@@ -23,7 +23,7 @@ class MarkdownFileData (FileData):
             self.contents = data.content
         
         if(data.keys()):
-            self.setProperties(data.metadata)
+            self.addProperties(data.metadata)
 
     # def getProperty(self, name):
     #   print(type(self.properties))

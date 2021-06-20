@@ -17,15 +17,17 @@ from src.oa.generator.OAGenerator import OAGenerator
 
 def main():
     ############################################
+
+    logger.info("Running main ...")
     
     ## Define input requirements
-    
-    logger.info("Running main ...")
 
     inputPath = "./input"
     outputPath = "./output"
     
     ############################################
+
+    logger.info("Locating entries ...")
 
     ## Get the available entries
     
@@ -37,6 +39,8 @@ def main():
     
     ############################################
 
+    logger.info("Processing entries ...")
+
     ## Process the entries (render them)
 
     processor = EntriesProcessor()
@@ -44,25 +48,21 @@ def main():
     processor.process(entryList)
 
     # locator.printList(entryList)
+    # print([str(item) for item in entryList])
 
     ############################################
+    
+    logger.info("Generating OA ...")
     
     ## Generate the OA
     
     writer = OAWriter(inputPath, outputPath)
-    generator = OAGenerator(writer, entryList)
-    
+    generator = OAGenerator(writer, "default", entryList)
+
     generator.generate()
     
     ############################################
-
-                # if(not html):
-                #     logger.warning(f"Source file [{entry.getFullPath()}] has no contents, will be ignored.")
-                # else:
-                #     name = entry.getProperty('name') if entry.hasProperty('name') else path.splitext(entry.getNameWithoutIndexOrdered())[0]
-                    
-                #     writer.write(entry.path, outputPath, name, html)
-
+    
 ################################################
 
 if __name__ == "__main__":

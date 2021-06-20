@@ -22,6 +22,13 @@ class EntryData:
     def setProperties(self, properties):
         self.properties = properties
 
+    def addProperties(self, properties):
+        for key, value in properties.items():
+            self.addProperty(key, value)
+        
+    def addProperty(self, key, value):
+        self.properties[key] = value
+
     def getProperties(self):
       return self.properties
 
@@ -36,11 +43,11 @@ class EntryData:
 
     # Overiding magic methods for relational operators
   
-    def __eq__(self, other):
-        return self.getProperty("weight") == other.getProperty("weight")
+    # def __eq__(self, other):
+    #     return self.getProperty("weight") == other.getProperty("weight")
 
-    def __ne__(self, other):
-        return self.getProperty("weight") != other.getProperty("weight")
+    # def __ne__(self, other):
+    #     return self.getProperty("weight") != other.getProperty("weight")
 
     def __lt__(self, other):
         return self.getProperty("weight") < other.getProperty("weight")

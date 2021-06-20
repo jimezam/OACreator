@@ -20,20 +20,19 @@ class EntriesProcessor:
                     try:
                         self.processMarkdownFile(entry)                    
                     except Exception as e:
-                        entries.remove(entry)
                         logger.warning(f"Source file [{entry.getFullPath()}] {e}, will be ignored.")    
+                        entries.remove(entry)                        
                 else:
                     logger.warning(f"Source file [{entry.getFullPath()}] with no supported type, will be ignored.")
 
             if(isinstance(entry, DirectoryData)):
-                # TODO
-                logger.error(f"Process a directory IS NOT IMPLEMENTED yet!")
+                self.process(entry.getEntries())
     
     def processMarkdownFile(self, entry):
         # Read front matter / Read contents
         entry.loadContents()
 
-        if(entry.getContents()==None):
+        if(entry.getContents() == None):
             raise Exception('has no contents')
 
         # Process contents

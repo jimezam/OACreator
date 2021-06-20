@@ -12,6 +12,9 @@ class DirectoryData (EntryData):
     def setEntries(self, entries):
         self.entries = entries
         
+    def getEntries(self):
+        return self.entries
+        
     def __str__(self):
         response = f"path: {self.path}; name: {self.name}; entries: \n"
         
