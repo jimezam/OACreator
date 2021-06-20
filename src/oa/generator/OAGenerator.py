@@ -42,6 +42,8 @@ class OAGenerator:
 
                 self.writer.write(entry, content)
     
+            # TODO: problemas cuando se genera al interior de los "folder" -> breadcrumb
+    
             if(isinstance(entry, DirectoryData)):
                 self.generate(entry.getEntries())
     
@@ -60,11 +62,26 @@ class OAGenerator:
         breadcrumbs = []
         levels = ["OA"] + os.path.normpath(entry.getFullPath()).split(os.sep)[1:-1]
         
+        path = ["."]
+        url = "#"
+        
+        # TODO: breadcrumbs URLs
+        
         for level in levels:
+            if(level == "OA"):
+                url = "./#"
+            else:
+                path.append(os.path.join(path[-1] or "", level))
+                url = os.path.join(path[-2], level+".html")
+            
+            # print(path)
+            # print(url)
+            # print(level)
+            
             crumb = {
                 "name": level,
                 "hint": level,
-                "url": "xxx"            # TODO
+                "url": url
             }
             
             breadcrumbs.append(crumb)
