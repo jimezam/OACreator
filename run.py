@@ -10,13 +10,14 @@ logger = log.setup_custom_logger('root')
 
 from src.oa.io.reader.EntriesLocator import EntriesLocator
 from src.oa.processor.EntriesProcessor import EntriesProcessor
+from src.oa.io.writer.OAWriter import OAWriter
 
 ################################################
 
 def main():
     ############################################
     
-    # Define input requirements
+    ## Define input requirements
     
     logger.info("Running main ...")
 
@@ -25,7 +26,7 @@ def main():
     
     ############################################
 
-    # Get the entries available
+    ## Get the available entries
     
     locator = EntriesLocator()
     
@@ -35,14 +36,22 @@ def main():
     
     ############################################
 
-    # Process the entries and save the products
+    ## Process the entries (render them)
 
     processor = EntriesProcessor()
 
     processor.process(entryList)
 
-    locator.printList(entryList)
+    # locator.printList(entryList)
 
+    ############################################
+    
+    ## Write the OA to storage
+    
+    writer = OAWriter()
+    
+    writer.write(inputPath, outputPath, entryList)
+    
     ############################################
 
                 # if(not html):
