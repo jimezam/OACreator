@@ -8,7 +8,8 @@ logger = log.setup_custom_logger('root')
 
 ################################################
 
-import src.oa.io.reader.oa_reader as reader
+from src.oa.io.reader.ResourcesLocator import ResourcesLocator
+
 import src.oa.processor.oa_processor as processor
 
 ################################################
@@ -27,15 +28,17 @@ def main():
 
     # Get the entries available
     
-    entryList = reader.list(inputPath, recursive=True)
+    locator = ResourcesLocator()
+    
+    entryList = locator.list(inputPath, recursive=True)
 
-    # reader.printList(entryList)
+    locator.printList(entryList)
     
     ############################################
 
     # Process the entries and save the products
 
-    processor.process(entryList, outputPath)
+    # processor.process(entryList, outputPath)
 
     ############################################
 
@@ -44,4 +47,4 @@ def main():
 if __name__ == "__main__":
     main()
     
-################################################
+################################################ 

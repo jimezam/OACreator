@@ -10,9 +10,9 @@ class MarkdownFileData (FileData):
     def __init__(self, path, name):
         super().__init__(path, name)
 
-    def __init__(self, fileData):
-        super().__init__(fileData.path, fileData.name)
-        self.contents = fileData.contents
+    # def __init__(self, fileData):
+    #     super().__init__(fileData.path, fileData.name)
+    #     self.contents = fileData.contents
 
     def loadContents(self):
         data = frontmatter.load(self.getFullPath())

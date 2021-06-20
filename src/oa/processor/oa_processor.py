@@ -12,8 +12,10 @@ logger = logging.getLogger('root')
 def process(entries, outputPath):
     for entry in entries:
         if(isinstance(entry, FileData)):
-            extension = path.splitext(entry.name)[1]
             
+            #########################################################
+            extension = path.splitext(entry.name)[1]
+
             if(extension == ".md" or extension == ".MD"):      # markdown
                 html = processMarkdownFile(entry)
             else:
