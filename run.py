@@ -11,6 +11,7 @@ logger = log.setup_custom_logger('root')
 from src.oa.io.reader.EntriesLocator import EntriesLocator
 from src.oa.processor.EntriesProcessor import EntriesProcessor
 from src.oa.io.writer.OAWriter import OAWriter
+from src.oa.generator.OAGenerator import OAGenerator
 
 ################################################
 
@@ -46,11 +47,12 @@ def main():
 
     ############################################
     
-    ## Write the OA to storage
+    ## Generate the OA
     
-    writer = OAWriter()
+    writer = OAWriter(inputPath, outputPath)
+    generator = OAGenerator(writer, entryList)
     
-    writer.write(inputPath, outputPath, entryList)
+    generator.generate()
     
     ############################################
 

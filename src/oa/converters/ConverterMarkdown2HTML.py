@@ -7,6 +7,7 @@ from markdown_it import MarkdownIt
 
 logger = logging.getLogger('root')
 
+# TODO: https://wiki.python.org/moin/reStructuredText
 
 class ConverterMarkdown2HTML (Converter):
 
