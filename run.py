@@ -8,9 +8,8 @@ logger = log.setup_custom_logger('root')
 
 ################################################
 
-from src.oa.io.reader.ResourcesLocator import ResourcesLocator
-
-import src.oa.processor.oa_processor as processor
+from src.oa.io.reader.EntriesLocator import EntriesLocator
+from src.oa.processor.EntriesProcessor import EntriesProcessor
 
 ################################################
 
@@ -28,19 +27,30 @@ def main():
 
     # Get the entries available
     
-    locator = ResourcesLocator()
+    locator = EntriesLocator()
     
     entryList = locator.list(inputPath, recursive=True)
 
-    locator.printList(entryList)
+    # locator.printList(entryList)
     
     ############################################
 
     # Process the entries and save the products
 
-    # processor.process(entryList, outputPath)
+    processor = EntriesProcessor()
+
+    processor.process(entryList)
+
+    locator.printList(entryList)
 
     ############################################
+
+                # if(not html):
+                #     logger.warning(f"Source file [{entry.getFullPath()}] has no contents, will be ignored.")
+                # else:
+                #     name = entry.getProperty('name') if entry.hasProperty('name') else path.splitext(entry.getNameWithoutIndexOrdered())[0]
+                    
+                #     writer.write(entry.path, outputPath, name, html)
 
 ################################################
 

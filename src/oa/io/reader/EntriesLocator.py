@@ -1,7 +1,6 @@
 from genericpath import isdir
 from os import listdir
 from os.path import isfile, join, splitext
-
 import logging
 
 from src.oa.io.MarkdownFileData import MarkdownFileData
@@ -9,9 +8,9 @@ from src.oa.io.DirectoryData import DirectoryData
 
 logger = logging.getLogger('root')
 
-class ResourcesLocator:
+class EntriesLocator:
     def __init__(self):
-        self.entries = []
+        pass
         
     def list(self, path, recursive=True):
         entries = []
@@ -48,3 +47,5 @@ class ResourcesLocator:
     def printList(self, entries):
         for entry in entries:
             print("> " + str(entry))
+            # if(isinstance(entry, MarkdownFileData)):
+            #     print(">> [" + str(entry.getRenderedContents()) + "]")
