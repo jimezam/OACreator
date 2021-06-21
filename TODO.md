@@ -1,15 +1,17 @@
 # Things to do
 
-- OA generation (in progress)
-- Theme handling
+- Listado de items (completo)
+- Selected item
+- Mejorar soporte de markdown (plugins?)
+- Elementos de la página (derecha)
+- Theme handling (divs partes y elementos)
 - Properties
   - Name
   - Weight
-- Breadcrumbs
 - Migrate Moustache to Jinja
   - https://pypi.org/project/Jinja2/
   - https://palletsprojects.com/p/jinja/
-- Logo click -> go index
+- Restructurar componentes principales, io y elementos
 
 - Default logo  
 - https://openclipart.org/detail/177642/engraved-cube-2

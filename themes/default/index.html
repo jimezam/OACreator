@@ -12,12 +12,12 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!-- FontAwesome CSS -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
     integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
-    {{# head-base }}
-    <base href="{{ head-base }}" target="_top">
-    {{/ head-base }}
+  {{# head-base }}
+  <base href="{{ head-base }}" target="_top">
+  {{/ head-base }}
 </head>
 
 <body>
@@ -28,11 +28,13 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
-            
+
             <div class="row">
               {{# header.logo }}
               <div class="col-sm-1">
-                <img src="https://openclipart.org/image/400px/177642" class="img-fluid" title="¡Ir al inicio!">
+                <a href="{{ header.link }}">
+                  <img src="https://openclipart.org/image/400px/177642" class="img-fluid" title="¡Ir al inicio!">
+                </a>
               </div>
               {{/ header.logo }}
 
@@ -66,12 +68,16 @@
             <div class="card-text">
               <table>
                 {{# items }}
-                <tr>
-                  <td>
-
+                <tr class="pb-2">
+                  <td class="align-middle text-center pr-2">
+                    <a href="{{ url }}" title="{{ hint }}">
+                      <i class="far fa-{{ icon }}"></i>
+                    </a>
                   </td>
-                  <td class="pb-2">
-                    <a href="{{ url }}" title="{{ hint }}">{{ name }} {{ type }}</a>
+                  <td class="align-middle text-left">
+                    <a href="{{ url }}" title="{{ hint }}">
+                      {{ name }}
+                    </a>
                   </td>
                 </tr>
                 {{/ items }}
@@ -109,7 +115,7 @@
 
     <!-- Footer -->
     {{# footer.show }}
-    <div class="row mt-2">
+    <div class="row mt-2 text-center">
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
@@ -134,9 +140,9 @@
     crossorigin="anonymous"></script>
 
   <!-- Font Awesome -->
-  <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" 
-          integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" 
-          crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+    integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

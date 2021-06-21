@@ -147,7 +147,8 @@ class OAGenerator:
                 "name": entry.getProperty('name'),
                 "hint": entry.getProperty('hint') or entry.getProperty('name'),
                 "url": filePath,
-                "type": self.generateType(entry)
+                "type": self.generateType(entry),
+                "icon": "file" if self.generateType(entry) == "page" else "folder"
             }
             
             items.append(item)
@@ -183,11 +184,14 @@ class OAGenerator:
 
         # TODO: change logo por defecto (true con imagen default)
 
+        path, filePath = OAWriter.createEntryPath(self.entries[0])
+
         data = {
             "show": self.metadata.getProperty("header-show") if self.metadata.hasProperty("header-show") else True,
             "logo": self.metadata.getProperty("header-logo") if self.metadata.hasProperty("header-logo") else True,
             "title": self.metadata.getProperty("header-title") if self.metadata.hasProperty("header-title") else defaultTitle,
-            "subtitle": self.metadata.getProperty("header-subtitle") if self.metadata.hasProperty("header-subtitle") else defaultSubtitle
+            "subtitle": self.metadata.getProperty("header-subtitle") if self.metadata.hasProperty("header-subtitle") else defaultSubtitle,
+            "link": filePath
         }
 
         return data
