@@ -1,4 +1,5 @@
 from src.oa.io.FileData import FileData
+from src.oa.converters.ConverterMarkdown2HTML import ConverterMarkdown2HTML
 
 import logging
 import frontmatter
@@ -25,5 +26,11 @@ class MarkdownFileData (FileData):
         if(data.keys()):
             self.addProperties(data.metadata)
 
-    # def getProperty(self, name):
-    #   print(type(self.properties))
+        # Process contents
+        ## TODO
+
+        # Convert it to HTML
+        converter = ConverterMarkdown2HTML(self.getContents() or '')
+        html = converter.convert()
+        
+        self.setRenderedContents(html)
