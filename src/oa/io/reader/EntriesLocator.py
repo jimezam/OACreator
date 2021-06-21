@@ -12,7 +12,7 @@ class EntriesLocator:
     def __init__(self):
         pass
         
-    def list(self, path, recursive=True):
+    def list(self, path, directory=None, recursive=True):
         entries = []
         
         for entry in listdir(path):
@@ -25,14 +25,16 @@ class EntriesLocator:
                 extension = splitext(entry)[1]
                 
                 if(extension == ".md" or extension == ".MD"):      # markdown files
-                    obj = MarkdownFileData(path, entry)                    
+                    obj = MarkdownFileData(path, entry)   
+                    obj.setParent(directory)                 
                 else:
                     logger.warning(f"Not source file [{entry_path}] will be ignored.")
             
             if(isdir(entry_path) and recursive):
                 obj = DirectoryData(path, entry)
-
-                directoryEntries = self.list(obj.getFullPath(), recursive)
+                obj.setParent(directory)
+                
+                directoryEntries = self.list(obj.getFullPath(), obj, recursive)
                     
                 if(len(directoryEntries) > 0):                                    
                     obj.setEntries(directoryEntries)

@@ -14,6 +14,7 @@ class EntryData:
             "weight": sys.maxsize,
             "name": os.path.splitext(self.name)[0]
         }
+        self.parent = None
 
     def getName(self):
         return self.name
@@ -65,3 +66,9 @@ class EntryData:
 
     # def __ge__(self, other):
     #     return self.getProperty("weight") >= other.getProperty("weight")
+
+    def getParent(self):
+        return self.parent
+    
+    def setParent(self, parent):
+        self.parent = parent

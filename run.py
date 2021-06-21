@@ -36,7 +36,7 @@ def main():
     
     locator = EntriesLocator()
     
-    entryList = locator.list(inputPath, recursive=True)
+    entryList = locator.list(inputPath, directory=None, recursive=True)
 
     # locator.printList(entryList)
     
@@ -63,6 +63,7 @@ def main():
     ## Generate the OA
     
     writer = OAWriter(inputPath, outputPath)
+    
     generator = OAGenerator(metadata, writer, "default", entryList)
 
     generator.generate()

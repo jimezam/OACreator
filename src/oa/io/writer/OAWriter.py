@@ -10,15 +10,12 @@ class OAWriter:
         self.outputPath = outputPath
     
     @staticmethod
-    def createEntryPath(outputPath, entry):
+    def createEntryPath(entry, outputPath=""):
         # Split the entry's full path
         sourcePath = os.path.normpath(entry.getFullPath()).split(os.sep)
-        
-        # Get the "real" name of the entry
-        if(entry.hasProperty('name')):
-            filename = entry.getProperty('name')
-        else:
-            filename = sourcePath[-1]
+
+        # Get the filename        
+        filename = sourcePath[-1]
         
         # Get the filename with no extension
         filenameNoExtension = os.path.splitext(filename)[0]
@@ -35,7 +32,7 @@ class OAWriter:
         
     def write(self, entry, content):
         # Get the entry output's path and filepath
-        path, filePath = OAWriter.createEntryPath(self.outputPath, entry)
+        path, filePath = OAWriter.createEntryPath(entry, self.outputPath)
         
         # Create the output's directory structure for the entry
         if not os.path.exists(path):
