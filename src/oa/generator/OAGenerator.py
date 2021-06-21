@@ -10,7 +10,8 @@ from src.oa.io.writer.OAWriter import OAWriter
 logger = logging.getLogger('root')
 
 class OAGenerator:
-    def __init__(self, writer, theme, entries):
+    def __init__(self, metadata, writer, theme, entries):
+        self.metadata = metadata
         self.writer = writer
         self.theme = theme
         self.entries = entries
@@ -35,7 +36,9 @@ class OAGenerator:
                 data = {
                     "content": self.generateContent(entry),
                     "items": self.generateItems(entries),
-                    "breadcrumbs": self.generateBreadcrumbs(entry)
+                    "breadcrumbs": self.generateBreadcrumbs(entry),
+                    "header": self.generateHeader(),
+                    "footer": self.generateFooter()
                 }
 
                 content = self.renderTemplate(theme, template, data)
@@ -133,3 +136,29 @@ class OAGenerator:
         content = self.renderTemplate(theme=self.theme, template="directory_listing.html", data=data)
         
         return content
+
+    def generateHeader(self):
+        defaultTitle = "The most interesting learning object"
+        defaultSubtitle = "Create a \"_metadata.md\" file to customize this messages"
+
+        # TODO: change logo por defecto (true con imagen default)
+
+        data = {
+            "show": self.metadata.getProperty("header-show") if self.metadata.hasProperty("header-show") else True,
+            "logo": self.metadata.getProperty("header-logo") if self.metadata.hasProperty("header-logo") else True,  
+            "title": self.metadata.getProperty("header-title") if self.metadata.hasProperty("header-title") else defaultTitle,
+            "subtitle": self.metadata.getProperty("header-subtitle") if self.metadata.hasProperty("header-subtitle") else defaultSubtitle
+        }
+
+        return data
+    
+    def generateFooter(self):
+        # TODO: improve default message with version
+        defaultMessage = "Generated with OACreator"
+        
+        data = {
+            "show": self.metadata.getProperty("footer-show") if self.metadata.hasProperty("footer-show") else True,
+            "message": self.metadata.getProperty("footer-message") if self.metadata.hasProperty("footer-message") else defaultMessage
+        }
+
+        return data

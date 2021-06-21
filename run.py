@@ -10,6 +10,7 @@ logger = log.setup_custom_logger('root')
 
 ################################################
 
+from src.oa.io.EntryData import EntryData
 from src.oa.io.reader.EntriesLocator import EntriesLocator
 from src.oa.processor.EntriesProcessor import EntriesProcessor
 from src.oa.io.writer.OAWriter import OAWriter
@@ -43,12 +44,15 @@ def main():
 
     logger.info("Processing entries ...")
 
+    metadata = EntryData(None, "metadata")
+
     ## Process the entries (render them)
 
     processor = EntriesProcessor()
+    
+    processor.process(entryList, metadata)
 
-    processor.process(entryList)
-
+    # print(metadata.getProperties())
     # locator.printList(entryList)
     # print([str(item) for item in entryList])
 
@@ -59,7 +63,7 @@ def main():
     ## Generate the OA
     
     writer = OAWriter(inputPath, outputPath)
-    generator = OAGenerator(writer, "default", entryList)
+    generator = OAGenerator(metadata, writer, "default", entryList)
 
     generator.generate()
     

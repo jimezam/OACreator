@@ -16,21 +16,25 @@ class MarkdownFileData (FileData):
     #     self.contents = fileData.contents
 
     def loadContents(self):
+        # Read the front matter
         data = frontmatter.load(self.getFullPath())
         
         # print(frontmatter.dumps(data))
         
+        # Load the raw contents
         if(data.content):
             self.contents = data.content
         
+        # Load the properties
         if(data.keys()):
             self.addProperties(data.metadata)
 
         # Process contents
         ## TODO
 
-        # Convert it to HTML
-        converter = ConverterMarkdown2HTML(self.getContents() or '')
-        html = converter.convert()
+        # Render the contents to HTML
+        if(self.getContents()):
+            converter = ConverterMarkdown2HTML(self.getContents())
+            html = converter.convert()
         
-        self.setRenderedContents(html)
+            self.setRenderedContents(html)

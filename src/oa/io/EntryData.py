@@ -15,6 +15,9 @@ class EntryData:
             "name": os.path.splitext(self.name)[0]
         }
 
+    def getName(self):
+        return self.name
+
     def __str__(self):
         return f"path: {self.path}; name: {self.name}\n"
 
@@ -57,8 +60,8 @@ class EntryData:
     def __gt__(self, other):
         return self.getProperty("weight") > other.getProperty("weight")
 
-    def __le__(self, other):
-        return self.getProperty("weight") <= other.getProperty("weight")
+    # def __le__(self, other):
+    #     return self.getProperty("weight") <= other.getProperty("weight")
 
-    def __ge__(self, other):
-        return self.getProperty("weight") >= other.getProperty("weight")
+    # def __ge__(self, other):
+    #     return self.getProperty("weight") >= other.getProperty("weight")

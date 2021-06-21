@@ -21,10 +21,11 @@ class EntriesLocator:
             obj = None        
             
             if(isfile(entry_path)):
+                filename = splitext(entry)[0]
                 extension = splitext(entry)[1]
                 
-                if(extension == ".md" or extension == ".MD"):      # markdown
-                    obj = MarkdownFileData(path, entry)
+                if(extension == ".md" or extension == ".MD"):      # markdown files
+                    obj = MarkdownFileData(path, entry)                    
                 else:
                     logger.warning(f"Not source file [{entry_path}] will be ignored.")
             
@@ -47,5 +48,3 @@ class EntriesLocator:
     def printList(self, entries):
         for entry in entries:
             print("> " + str(entry))
-            # if(isinstance(entry, MarkdownFileData)):
-            #     print(">> [" + str(entry.getRenderedContents()) + "]")

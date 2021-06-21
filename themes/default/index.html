@@ -19,15 +19,39 @@
 <body>
   <div class="container">
     <!-- Header   -->
+    {{# header.show }}
     <div class="row mb-2">
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
-            Header
+            
+            <div class="row">
+              {{# header.logo }}
+              <div class="col-sm-1">
+                <img src="https://openclipart.org/image/400px/177642" class="img-fluid" title="¡Ir al inicio!">
+              </div>
+              {{/ header.logo }}
+
+              <div class="col-sm-11">
+                {{# header.title }}
+                <div class="row h3">
+                  {{ header.title }}
+                </div>
+                {{/ header.title }}
+
+                {{# header.subtitle }}
+                <div class="row">
+                  {{ header.subtitle }}
+                </div>
+                {{/ header.subtitle }}
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
+    {{/ header.show }}
 
     <!-- Content -->
     <div class="row">
@@ -80,15 +104,17 @@
     </div>
 
     <!-- Footer -->
+    {{# footer.show }}
     <div class="row mt-2">
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
-            Footer
+            {{ footer.message }}
           </div>
         </div>
       </div>
     </div>
+    {{/ footer.show }}
   </div>
 
   <!-- Optional JavaScript -->
