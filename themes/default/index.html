@@ -16,7 +16,7 @@
     integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
   {{# head-base }}
-  <base href="{{ head-base }}" target="_blank">
+  <base href="{{ head-base }}" target="_top">
   {{/ head-base }}
 
   <style>
@@ -46,7 +46,7 @@
             <div class="row">
               {{# header.logo }}
               <div class="col-sm-1">
-                <a href="{{ header.link }}" target="_top">
+                <a href="{{ header.link }}">
                   <img src="https://openclipart.org/image/400px/177642" class="img-fluid" title="¡Ir al inicio!">
                 </a>
               </div>
@@ -84,7 +84,7 @@
 
               <div class="list-group list-group-flush">
                 {{# items }}
-                <a href="{{ url }}" title="{{ hint }}" target="_top"
+                <a href="{{ url }}" title="{{ hint }}"
                   class="list-group-item list-group-item-action d-flex justify-content-between py-1 px-2 {{# active }}active{{/ active }}">
                   <span style="width: 30px;" class="text-center pr-4">
                     <i class="far fa-{{ icon }}"></i>
@@ -114,7 +114,7 @@
           <!-- Breadcrumbs -->
           <div class="card-body">
             {{# breadcrumbs }}
-            <i class="fas fa-angle-right"></i> <a href="{{ url }}" title="{{ hint }}" target="_top">{{ name }}</a>
+            <i class="fas fa-angle-right"></i> <a href="{{ url }}" title="{{ hint }}">{{ name }}</a>
             {{/ breadcrumbs }}
           </div>
         </div>
