@@ -13,9 +13,9 @@
 - Restructurar componentes principales, io y elementos
 - Seguimiento local de lectura
 - favicon
-- links en _blank, hacer los propios _top
 - Theme default styles -> .css
-  
+- itemlist: directorio >, archivos control de lectura
+
 - Default logo  
 - https://openclipart.org/detail/177642/engraved-cube-2
 - https://openclipart.org/detail/117355/geometry-1
