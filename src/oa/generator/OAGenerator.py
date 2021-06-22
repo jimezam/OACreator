@@ -39,6 +39,8 @@ class OAGenerator:
         # TODO: still to test
         localEntries.sort()
 
+        items = self.generateItems(self.entries)
+
         if(not self.directoryHasIndex(localEntries)):
             indexPresent = True
 
@@ -46,22 +48,36 @@ class OAGenerator:
             if(isinstance(entry, FileData) or
                isinstance(entry, DirectoryData)):
 
+                self.markCurrentItemEntry(items, entry)
+
                 data = {
                     "head-base": self.generateHeadBase(level),
                     "content": self.generateContent(entry),
-                    # TODO: caché
-                    "items": self.generateItems(self.entries),
+                    "items": items,
                     "breadcrumbs": self.generateBreadcrumbs(entry),
                     "header": self.generateHeader(),
-                    "footer": self.generateFooter()
+                    "footer": self.generateFooter(),
                 }
 
                 content = self.renderTemplate(theme, template, data)
 
                 self.writer.write(entry, content)
-
+                
             if(isinstance(entry, DirectoryData)):
                 self.generate(level+1, entry.getEntries())
+
+    def markCurrentItemEntry(self, items, currentEntry = None):
+        if(currentEntry):
+            path, filePath = OAWriter.createEntryPath(currentEntry)
+
+        for item in items:
+            if(filePath):
+                if(filePath == item["url"]):
+                    item["active"] = True
+                else:
+                    item["active"] = False
+            else:
+                item["active"] = False
 
     def directoryHasIndex(self, localEntries):
         for entry in localEntries:
@@ -144,6 +160,7 @@ class OAGenerator:
             path, filePath = OAWriter.createEntryPath(entry)
 
             item = {
+                "active": False,
                 "name": entry.getProperty('name'),
                 "hint": entry.getProperty('hint') or entry.getProperty('name'),
                 "url": filePath,

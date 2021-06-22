@@ -18,6 +18,20 @@
   {{# head-base }}
   <base href="{{ head-base }}" target="_top">
   {{/ head-base }}
+
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    .container {
+      height: 100%;
+      /* min-height: 100%; */
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
 </head>
 
 <body>
@@ -60,40 +74,44 @@
     {{/ header.show }}
 
     <!-- Content -->
-    <div class="row">
+    <div class="row" style="flex: 1;">
+      <!-- Left sidebar -->
       <div class="col-sm-3">
         <div class="card h-100">
           <div class="card-body">
             <h4 class="card-title">Contenidos</h4>
             <div class="card-text">
-              <table>
+
+              <div class="list-group list-group-flush">
                 {{# items }}
-                <tr class="pb-2">
-                  <td class="align-middle text-center pr-2">
-                    <a href="{{ url }}" title="{{ hint }}">
-                      <i class="far fa-{{ icon }}"></i>
-                    </a>
-                  </td>
-                  <td class="align-middle text-left">
-                    <a href="{{ url }}" title="{{ hint }}">
-                      {{ name }}
-                    </a>
-                  </td>
-                </tr>
+                <a href="{{ url }}" itle="{{ hint }}"
+                  class="list-group-item list-group-item-action d-flex justify-content-between py-1 px-2 {{# active }}active{{/ active }}">
+                  <span style="width: 30px;" class="text-center pr-4">
+                    <i class="far fa-{{ icon }}"></i>
+                  </span>
+
+                  <span style="width: 100%;">
+                    {{ name }}
+                  </span>
+
+                  <span class="text-right" style="width: 30px;">x</span>
+                </a>
                 {{/ items }}
-              </table>
-              <p style="margin-bottom: 5px">
-              </p>
+              </div>
               {{^ items }}
               ¡Ninguno!
               {{/ items }}
+
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Center area -->
       <div class="col-sm-7">
         <div class="card mb-2">
+
+          <!-- Breadcrumbs -->
           <div class="card-body">
             {{# breadcrumbs }}
             > <a href="{{ url }}" title="{{ hint }}">{{ name }}</a>
@@ -101,9 +119,11 @@
           </div>
         </div>
 
+        <!-- Formal contents -->
         {{{ content }}}
       </div>
 
+      <!-- Right sidebar -->
       <div class="col-sm-2">
         <div class="card h-100">
           <div class="card-body">

@@ -1,7 +1,6 @@
 # Things to do
 
 - Listado de items (completo)
-- Selected item
 - Mejorar soporte de markdown (plugins?)
 - Elementos de la página (derecha)
 - Theme handling (divs partes y elementos)
@@ -12,7 +11,11 @@
   - https://pypi.org/project/Jinja2/
   - https://palletsprojects.com/p/jinja/
 - Restructurar componentes principales, io y elementos
-
+- Seguimiento local de lectura
+- favicon
+- links en _blank, hacer los propios _top
+- Theme default styles -> .css
+  
 - Default logo  
 - https://openclipart.org/detail/177642/engraved-cube-2
 - https://openclipart.org/detail/117355/geometry-1
