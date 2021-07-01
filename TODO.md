@@ -1,20 +1,20 @@
 # Things to do
 
-- Listado de items (completo)
-- Mejorar soporte de markdown (plugins?)
-- Elementos de la página (derecha)
-- Theme handling (divs partes y elementos)
-- Properties
-  - Name
-  - Weight
 - Migrate Moustache to Jinja
   - https://pypi.org/project/Jinja2/
   - https://palletsprojects.com/p/jinja/
-- Restructurar componentes principales, io y elementos
-- Seguimiento local de lectura
 - favicon
-- Theme default styles -> .css
+- Restructurar componentes principales, io y elementos
+- Listado de items (completo)
+- Mejorar soporte de markdown (plugins?)
+- Elementos de la página (derecha)
+- Properties
+  - Name
+  - Weight
+- Seguimiento local de lectura
 - itemlist: directorio >, archivos control de lectura
+- Theme handling (divs partes y elementos)
+- Theme default styles -> .css
 
 - Default logo  
 - https://openclipart.org/detail/177642/engraved-cube-2
