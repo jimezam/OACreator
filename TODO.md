@@ -1,9 +1,8 @@
 # Things to do
 
-- Migrate Moustache to Jinja
-  - https://pypi.org/project/Jinja2/
-  - https://palletsprojects.com/p/jinja/
-- favicon
+- test jinja2 autoencoder (html content)
+- favicon: move and set  
+  https://favicon.io/favicon-converter/
 - Restructurar componentes principales, io y elementos
 - Listado de items (completo)
 - Mejorar soporte de markdown (plugins?)
@@ -15,6 +14,14 @@
 - itemlist: directorio >, archivos control de lectura
 - Theme handling (divs partes y elementos)
 - Theme default styles -> .css
+- Inheritance templates
+
+- Jinja
+- https://palletsprojects.com/p/jinja/
+- https://jinja.palletsprojects.com/en/3.0.x/api
+- https://jinja.palletsprojects.com/en/3.0.x/templates/
+- https://jinja.palletsprojects.com/en/3.0.x/extensions/
+- https://jinja.palletsprojects.com/en/3.0.x/extensions/
 
 - Default logo  
 - https://openclipart.org/detail/177642/engraved-cube-2
