@@ -1,0 +1,9 @@
+<ul>
+    {% for element in elements %}
+    <li>
+        <a href="{{ element.url }}" title="{{ element.hint }}">{{ element.name }}</a>
+    </li>
+    {% else %}
+    <li>¡Ninguno!</li>
+    {% endfor %}
+</ul>

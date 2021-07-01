@@ -1,6 +1,7 @@
-import chevron
 import logging
 import os
+
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from src.oa.io.FileData import FileData
 from src.oa.io.MarkdownFileData import MarkdownFileData
@@ -10,8 +11,7 @@ from src.oa.io.writer.OAWriter import OAWriter
 logger = logging.getLogger('root')
 
 # TODO: tercerizar manejo de rutas
-# TODO: tercerizar la genración?
-
+# TODO: tercerizar la generación?
 
 class OAGenerator:
     def __init__(self, metadata, writer, theme, entries):
@@ -32,7 +32,7 @@ class OAGenerator:
             theme = self.theme
 
         if(not template):
-            template = "index.html"
+            template = "index.html.jinja"
 
         ###################################################################
 
@@ -51,7 +51,9 @@ class OAGenerator:
                 self.markCurrentItemEntry(items, entry)
 
                 data = {
-                    "head-base": self.generateHeadBase(level),
+                    # TODO: default title -> config
+                    "page_title": self.metadata.getProperty("header-title") if self.metadata.hasProperty("header-title") else "Learning Object made with OACreator",
+                    "head_base": self.generateHeadBase(level),
                     "content": self.generateContent(entry),
                     "items": items,
                     "breadcrumbs": self.generateBreadcrumbs(entry),
@@ -62,11 +64,11 @@ class OAGenerator:
                 content = self.renderTemplate(theme, template, data)
 
                 self.writer.write(entry, content)
-                
+
             if(isinstance(entry, DirectoryData)):
                 self.generate(level+1, entry.getEntries())
 
-    def markCurrentItemEntry(self, items, currentEntry = None):
+    def markCurrentItemEntry(self, items, currentEntry=None):
         if(currentEntry):
             path, filePath = OAWriter.createEntryPath(currentEntry)
 
@@ -92,16 +94,16 @@ class OAGenerator:
         return False
 
     def renderTemplate(self, theme, template, data):
-        templateFile = os.path.join('themes', theme, template)
+        templateFile = os.path.join(theme, template)
 
-        try:
-            templateContents = open(templateFile, 'r')
-        except FileNotFoundError:
-            logger.error(
-                f"Template file [{templateFile}] was not found, ignoring render")
-            return None
+        environment = Environment(
+            loader = FileSystemLoader("themes"),
+            autoescape = select_autoescape()
+        )
 
-        return chevron.render(templateContents, data)
+        template = environment.get_template(templateFile)
+
+        return template.render(data)
 
     def generateHeadBase(self, level):
         base = "../" * (level)
@@ -120,13 +122,13 @@ class OAGenerator:
         if(parent):
             while(parent != None):
                 path, filePath = OAWriter.createEntryPath(parent)
-                
+
                 crumb = {
                     "name": parent.getName(),
                     "hint": parent.getName(),
                     "url": filePath
                 }
-                
+
                 breadcrumbs.append(crumb)
 
                 parent = parent.getParent()
@@ -140,7 +142,7 @@ class OAGenerator:
             "hint": "Raíz",
             "url": filePath
         }
-        
+
         breadcrumbs.append(crumb)
 
         return breadcrumbs[::-1]
@@ -167,7 +169,7 @@ class OAGenerator:
                 "type": self.generateType(entry),
                 "icon": "file" if self.generateType(entry) == "page" else "folder"
             }
-            
+
             items.append(item)
 
         return items
@@ -191,7 +193,7 @@ class OAGenerator:
         }
 
         content = self.renderTemplate(
-            theme=self.theme, template="directory_listing.html", data=data)
+            theme=self.theme, template="directory_listing.html.jinja", data=data)
 
         return content
 

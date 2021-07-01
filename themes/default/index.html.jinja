@@ -15,9 +15,9 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
     integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
-  {{# head-base }}
-  <base href="{{ head-base }}" target="_top">
-  {{/ head-base }}
+  {% if head_base %}
+  <base href="{{ head_base }}" target="_top">
+  {% endif %}
 
   <style>
     html,
@@ -37,33 +37,33 @@
 <body>
   <div class="container">
     <!-- Header   -->
-    {{# header.show }}
+    {% if header.show %}
     <div class="row mb-2">
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
 
             <div class="row">
-              {{# header.logo }}
+              {% if header.logo %}
               <div class="col-sm-1">
                 <a href="{{ header.link }}">
                   <img src="https://openclipart.org/image/400px/177642" class="img-fluid" title="¡Ir al inicio!">
                 </a>
               </div>
-              {{/ header.logo }}
+              {% endif %}
 
               <div class="col-sm-11">
-                {{# header.title }}
+                {% if header.title %}
                 <div class="row h3">
                   {{ header.title }}
                 </div>
-                {{/ header.title }}
+                {% endif %}
 
-                {{# header.subtitle }}
+                {% if header.subtitle %}
                 <div class="row">
                   {{ header.subtitle }}
                 </div>
-                {{/ header.subtitle }}
+                {% endif %}
               </div>
             </div>
 
@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-    {{/ header.show }}
+    {% endif %}
 
     <!-- Content -->
     <div class="row" style="flex: 1;">
@@ -83,24 +83,23 @@
             <div class="card-text">
 
               <div class="list-group list-group-flush">
-                {{# items }}
-                <a href="{{ url }}" title="{{ hint }}"
-                  class="list-group-item list-group-item-action d-flex justify-content-between py-1 px-2 {{# active }}active{{/ active }}">
+               {% for item in items %}
+                <a href="{{ item.url }}" title="{{ item.hint }}"
+                  class="list-group-item list-group-item-action d-flex justify-content-between py-1 px-2 {% if item.active %}active{% endif %}">
                   <span style="width: 30px;" class="text-center mr-2"> 
-                    <i class="far fa-{{ icon }}"></i>
+                    <i class="far fa-{{ item.icon }}"></i>
                   </span>
 
                   <span style="width: 100%;">
-                    {{ name }}
+                    {{ item.name }}
                   </span>
 
                   <span class="text-right" style="width: 30px;">x</span>
                 </a>
-                {{/ items }}
+              {% else %}
+                ¡Ninguno!
+              {% endfor %}
               </div>
-              {{^ items }}
-              ¡Ninguno!
-              {{/ items }}
 
             </div>
           </div>
@@ -113,14 +112,17 @@
 
           <!-- Breadcrumbs -->
           <div class="card-body">
-            {{# breadcrumbs }}
-            <i class="fas fa-angle-right"></i> <a href="{{ url }}" title="{{ hint }}">{{ name }}</a>
-            {{/ breadcrumbs }}
+            {% for breadcrumb in breadcrumbs %}
+            <i class="fas fa-angle-right"></i> 
+            <a href="{{ breadcrumb.url }}" title="{{ breadcrumb.hint }}">{{ breadcrumb.name }}</a>
+            {% endfor %}
           </div>
         </div>
 
         <!-- Formal contents -->
-        {{{ content }}}
+        {% autoescape false %}
+        {{ content }}
+        {% endautoescape %}
       </div>
 
       <!-- Right sidebar -->
@@ -134,7 +136,7 @@
     </div>
 
     <!-- Footer -->
-    {{# footer.show }}
+    {% if footer.show %}
     <div class="row mt-2 text-center">
       <div class="col-sm-12">
         <div class="card">
@@ -144,7 +146,7 @@
         </div>
       </div>
     </div>
-    {{/ footer.show }}
+    {% endif %}}
   </div>
 
   <!-- Optional JavaScript -->
